@@ -8,5 +8,8 @@
   "keywords": [],
   "author": "Kage Gamis",
   "license": "UNLICENSED",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.5.3"
+  }
 }
