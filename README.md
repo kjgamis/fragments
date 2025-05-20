@@ -6,19 +6,17 @@ A backend API server for managing content fragments.
 ## Installation
 
 1. Clone the repository:
-
-```bash
-git clone git@github.com:kjgamis/fragments.git
-cd fragments
-```
+    ```bash
+    git clone git@github.com:kjgamis/fragments.git
+    cd fragments
+    ```
 
 2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-```bash
-npm install
-```
-
-## Available Scriptsgit add README.md
+## Available Scripts
 
 ### Development
 
@@ -67,7 +65,6 @@ npm run lint
 
 ```
 fragments/
-├── .vscode/
 |── node_modules/
 ├── src/               # Source code
 │   ├── server.js      # Main server
