@@ -7,6 +7,7 @@ const compression = require('compression');
 const passport = require('passport');
 const authenticate = require('./auth');
 const routes = require('./routes');
+const { createErrorResponse } = require('./response');
 
 const logger = require('./logger');
 const pino = require('pino-http')({
@@ -38,13 +39,8 @@ app.use('/', routes);
 
 // Add 404 middleware to handle any requests for resources that can't be found
 app.use((req, res) => {
-  res.status(404).json({
-    status: 'error',
-    error: {
-      message: 'not found',
-      code: 404,
-    },
-  });
+  const response = createErrorResponse(404, 'not found');
+  res.status(404).json(response);
 });
 
 // Add error-handling middleware to deal with anything else
@@ -60,13 +56,8 @@ app.use((err, req, res, next) => {
     logger.error({ err }, `Error processing request`);
   }
 
-  res.status(status).json({
-    status: 'error',
-    error: {
-      message,
-      code: status,
-    },
-  });
+  const response = createErrorResponse(status, message);
+  res.status(status).json(response);
 });
 
 // Export our `app` so we can access it in server.js
