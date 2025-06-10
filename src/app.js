@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const passport = require('passport');
-const authenticate = require('./auth');
+const auth = require('./auth');
 const routes = require('./routes');
 const { createErrorResponse } = require('./response');
 
@@ -31,7 +31,7 @@ app.use(cors());
 app.use(compression());
 
 // Set up our passport authentication middleware
-passport.use(authenticate.strategy());
+passport.use(auth.strategy());
 app.use(passport.initialize());
 
 // Define our routes
