@@ -1,7 +1,6 @@
 const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
 const { createSuccessResponse } = require('../../response');
-const contentType = require('content-type');
 
 /**
  * Handle POST /fragments
@@ -23,12 +22,12 @@ module.exports = async (req, res) => {
 
   try {
     // Get the content type of the request
-    const { type } = contentType.parse(req.get('Content-Type'));
+    const contentTypeHeader = req.get('Content-Type');
 
     // Create a new fragment
     const fragment = new Fragment({
       ownerId: req.user,
-      type
+      type: contentTypeHeader
     });
 
     // Set the fragment's data

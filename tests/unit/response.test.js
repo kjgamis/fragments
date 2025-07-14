@@ -1,42 +1,47 @@
 // tests/unit/response.test.js
 
-const { createErrorResponse, createSuccessResponse } = require('../../src/response');
+const { createSuccessResponse, createErrorResponse } = require('../../src/response');
 
-// Define (i.e., name) the set of tests we're about to do
-describe('API Responses', () => {
-  // Write a test for calling createErrorResponse()
-  test('createErrorResponse()', () => {
-    const errorResponse = createErrorResponse(404, 'not found');
-    // Expect the result to look like the following
-    expect(errorResponse).toEqual({
-      status: 'error',
-      error: {
-        code: 404,
-        message: 'not found',
-      },
+describe('response', () => {
+  describe('createSuccessResponse()', () => {
+    test('creates a success response with status:ok', () => {
+      const res = createSuccessResponse({});
+      expect(res).toEqual({ status: 'ok' });
+    });
+
+    test('includes data in success response', () => {
+      const data = { a: 1, b: 2 };
+      const res = createSuccessResponse(data);
+      expect(res).toEqual({
+        status: 'ok',
+        a: 1,
+        b: 2,
+      });
+    });
+
+    test('handles null data', () => {
+      const res = createSuccessResponse(null);
+      expect(res).toEqual({ status: 'ok' });
     });
   });
 
-  // Write a test for calling createSuccessResponse() with no argument
-  test('createSuccessResponse()', () => {
-    // No arg passed
-    const successResponse = createSuccessResponse();
-    // Expect the result to look like the following
-    expect(successResponse).toEqual({
-      status: 'ok',
+  describe('createErrorResponse()', () => {
+    test('creates an error response with status:error', () => {
+      const res = createErrorResponse(404, 'not found');
+      expect(res.status).toBe('error');
     });
-  });
 
-  // Write a test for calling createSuccessResponse() with an argument
-  test('createSuccessResponse(data)', () => {
-    // Data argument included
-    const data = { a: 1, b: 2 };
-    const successResponse = createSuccessResponse(data);
-    // Expect the result to look like the following
-    expect(successResponse).toEqual({
-      status: 'ok',
-      a: 1,
-      b: 2,
+    test('includes error code and message', () => {
+      const code = 400;
+      const message = 'bad request';
+      const res = createErrorResponse(code, message);
+      expect(res).toEqual({
+        status: 'error',
+        error: {
+          code,
+          message,
+        },
+      });
     });
   });
 });

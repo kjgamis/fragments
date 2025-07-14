@@ -6,12 +6,10 @@ const wait = async (ms = 50) => new Promise((resolve) => setTimeout(resolve, ms)
 
 const validTypes = [
   `text/plain`,
-  /*
-   Currently, only text/plain is supported. Others will be added later.
-
   `text/markdown`,
   `text/html`,
   `application/json`,
+  /*
   `image/png`,
   `image/jpeg`,
   `image/webp`,
@@ -251,7 +249,8 @@ describe('Fragment class', () => {
       await fragment.setData(Buffer.from('a'));
 
       await Fragment.delete('1234', fragment.id);
-      expect(() => Fragment.byId('1234', fragment.id)).rejects.toThrow();
+      const result = await Fragment.byId('1234', fragment.id);
+      expect(result).toBeNull();
     });
   });
 });

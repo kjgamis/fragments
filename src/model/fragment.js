@@ -75,10 +75,11 @@ class Fragment {
    * @returns Promise<Fragment>
    */
   static async byId(ownerId, id) {
-    // TODO
-    // TIP: make sure you properly re-create a full Fragment instance after getting from db.
     try {
       const fragment = await readFragment(ownerId, id);
+      if (!fragment) {
+        return null;
+      }
       return new Fragment(fragment);
     } catch (error) {
       throw new Error(`Failed to get fragment ${id} for user ${ownerId}: ${error}`);
