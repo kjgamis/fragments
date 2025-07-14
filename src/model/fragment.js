@@ -48,10 +48,20 @@ class Fragment {
       if (!ownerId) {
         throw new Error('ownerId is required');
       }
+      // Get the list of fragments or IDs
       const fragments = await listFragments(ownerId, expand);
+      // If expand is true, each fragment should already be a full object
       if (expand) {
-        return fragments.map((fragment) => new Fragment(fragment));
+        // Make sure each fragment has the required fields before creating Fragment instances
+        return fragments.map(fragment => {
+          if (!fragment.id || !fragment.ownerId || !fragment.type) {
+            throw new Error(`Invalid fragment data: ${JSON.stringify(fragment)}`);
+          }
+          return new Fragment(fragment);
+        });
       }
+      
+      // If not expanded, just return the array of IDs
       return fragments;
     } catch (error) {
       throw new Error(`Failed to get fragments for user ${ownerId}: ${error}`);
@@ -168,7 +178,13 @@ class Fragment {
    */
   static isSupportedType(value) {
     const { type } = contentType.parse(value);
-    return ['text/plain'].includes(type);
+    return [
+      'text/plain',
+      'text/markdown',
+      'text/html',
+      'text/csv',
+      'application/json'
+    ].includes(type);
   }
 }
 

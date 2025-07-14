@@ -12,7 +12,15 @@ const router = express.Router();
 
 // Define our first route, which will be: GET /v1/fragments
 router.get('/fragments', require('./get'));
-// Other routes (POST, DELETE, etc.) will go here later on...
+
+// GET /v1/fragments/:id/info must come before other /fragments/:id routes
+router.get('/fragments/:id/info', require('./get-by-id-info'));
+
+// GET /v1/fragments/:id.ext (e.g., .html, .txt)
+router.get('/fragments/:id.:ext', require('./get-by-id-ext'));
+
+// GET /v1/fragments/:id
+router.get('/fragments/:id', require('./get-by-id'));
 
 const rawBody = () =>
   express.raw({
