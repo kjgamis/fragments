@@ -22,6 +22,9 @@ router.get('/fragments/:id.:ext', require('./get-by-id-ext'));
 // GET /v1/fragments/:id
 router.get('/fragments/:id', require('./get-by-id'));
 
+// DELETE /v1/fragments/:id
+router.delete('/fragments/:id', require('./delete'));
+
 const rawBody = () =>
   express.raw({
     inflate: true,
