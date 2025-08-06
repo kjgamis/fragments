@@ -2,7 +2,7 @@
     "taskDefinitionArn": "arn:aws:ecs:us-east-1:845847248250:task-definition/fragments-task:1",
     "containerDefinitions": [
         {
-            "name": "fragments-container",
+            "name": "fragments",
             "image": "kjgamis/fragments:latest",
             "cpu": 256,
             "memoryReservation": 512,
