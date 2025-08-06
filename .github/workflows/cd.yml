@@ -85,13 +85,12 @@ jobs:
         # for any values that should not be checked into git directly.  Here are
         # a few to get you started, but you should fill in the rest yourself.
         environment-variables: |
-          LOG_LEVEL=debug
+          LOG_LEVEL=info
           NODE_ENV=production
-          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN=${{ secrets.AWS_SESSION_TOKEN }}
           AWS_S3_BUCKET_NAME=kjgamis-fragments
           AWS_DYNAMODB_TABLE_NAME=fragments
+          AWS_COGNITO_POOL_ID=${{ secrets.AWS_COGNITO_POOL_ID }}
+          AWS_COGNITO_CLIENT_ID=${{ secrets.AWS_COGNITO_CLIENT_ID }}
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v2
       with:
