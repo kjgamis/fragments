@@ -85,8 +85,9 @@ jobs:
         # for any values that should not be checked into git directly.  Here are
         # a few to get you started, but you should fill in the rest yourself.
         environment-variables: |
-          LOG_LEVEL=info
+          LOG_LEVEL=debug
           NODE_ENV=production
+          AWS_REGION=us-east-1
           AWS_COGNITO_POOL_ID=${{ secrets.AWS_COGNITO_POOL_ID }}
           AWS_COGNITO_CLIENT_ID=${{ secrets.AWS_COGNITO_CLIENT_ID }}
     - name: Deploy Amazon ECS task definition
