@@ -87,8 +87,6 @@ jobs:
         environment-variables: |
           LOG_LEVEL=info
           NODE_ENV=production
-          AWS_S3_BUCKET_NAME=kjgamis-fragments
-          AWS_DYNAMODB_TABLE_NAME=fragments
           AWS_COGNITO_POOL_ID=${{ secrets.AWS_COGNITO_POOL_ID }}
           AWS_COGNITO_CLIENT_ID=${{ secrets.AWS_COGNITO_CLIENT_ID }}
     - name: Deploy Amazon ECS task definition
