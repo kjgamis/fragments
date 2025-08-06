@@ -20,7 +20,8 @@
                 {
                     "name": "PORT",
                     "value": "80",
-                    "AWS_S3_BUCKET_NAME": "kjgamis-fragments"
+                    "AWS_S3_BUCKET_NAME": "kjgamis-fragments",
+                    "AWS_DYNAMODB_TABLE_NAME": "fragments"
                 }
             ],
             "environmentFiles": [],
