@@ -19,7 +19,8 @@
             "environment": [
                 {
                     "name": "PORT",
-                    "value": "80"
+                    "value": "80",
+                    "AWS_S3_BUCKET_NAME": "kjgamis-fragments"
                 }
             ],
             "environmentFiles": [],
