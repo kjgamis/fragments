@@ -168,7 +168,34 @@ class Fragment {
    * @returns {Array<string>} list of supported mime types
    */
   get formats() {
-    // TODO: add more formats here later
+    const { type } = contentType.parse(this.type);
+    
+    // Define conversion formats based on the specification
+    if (type === 'text/plain') {
+      return ['text/plain']; // Only .txt
+    }
+    if (type === 'text/markdown') {
+      return ['text/markdown', 'text/html', 'text/plain']; // .md, .html, .txt
+    }
+    if (type === 'text/html') {
+      return ['text/html', 'text/plain']; // .html, .txt
+    }
+    if (type === 'text/csv') {
+      return ['text/csv', 'text/plain', 'application/json']; // .csv, .txt, .json
+    }
+    if (type === 'application/json') {
+      return ['application/json', 'application/yaml', 'text/plain']; // .json, .yaml, .yml, .txt
+    }
+    if (type === 'application/yaml') {
+      return ['application/yaml', 'text/plain']; // .yaml, .txt
+    }
+    
+    // Image-based conversions
+    if (type.startsWith('image/')) {
+      return ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif']; // All image formats
+    }
+    
+    // Default fallback
     return ['text/plain'];
   }
 
@@ -185,6 +212,7 @@ class Fragment {
       'text/html',
       'text/csv',
       'application/json',
+      'application/yaml',
       'image/png',
       'image/jpeg',
       'image/webp',
