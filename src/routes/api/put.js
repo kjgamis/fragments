@@ -11,17 +11,13 @@ const { createSuccessResponse, createErrorResponse } = require('../../response')
  * Handle PUT /fragments/:id
  */
 module.exports = async (req, res) => {
-  console.log('PUT route handler called with params:', req.params);
   try {
     const fragmentId = req.params.id;
     const ownerId = req.user; // From auth middleware
 
-    console.log('PUT request - fragmentId:', fragmentId, 'ownerId:', ownerId);
-
     // Check if fragment exists and belongs to user
     const existingFragment = await Fragment.byId(ownerId, fragmentId);
     if (!existingFragment) {
-      console.log('Fragment not found for ownerId:', ownerId, 'fragmentId:', fragmentId);
       return res.status(404).json(createErrorResponse(404, 'Fragment not found'));
     }
 
@@ -57,8 +53,7 @@ module.exports = async (req, res) => {
 
     // Return the updated fragment info
     res.status(200).json(createSuccessResponse({ fragment: updatedFragment }));
-  } catch (err) {
-    console.error('Error updating fragment:', err);
+  } catch {
     res.status(500).json(createErrorResponse(500, 'Internal server error'));
   }
 };
