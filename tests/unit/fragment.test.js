@@ -9,12 +9,11 @@ const validTypes = [
   `text/markdown`,
   `text/html`,
   `application/json`,
-  /*
   `image/png`,
   `image/jpeg`,
   `image/webp`,
+  `image/avif`,
   `image/gif`,
-  */
 ];
 
 describe('Fragment class', () => {

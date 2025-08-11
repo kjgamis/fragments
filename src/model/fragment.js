@@ -184,7 +184,12 @@ class Fragment {
       'text/markdown',
       'text/html',
       'text/csv',
-      'application/json'
+      'application/json',
+      'image/png',
+      'image/jpeg',
+      'image/webp',
+      'image/avif',
+      'image/gif'
     ].includes(type);
   }
 }
