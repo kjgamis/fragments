@@ -1,6 +1,6 @@
 {
   "name": "fragments",
-  "version": "0.10.6",
+  "version": "0.11.0",
   "main": "index.js",
   "scripts": {
     "test:watch": "jest -c jest.config.js --runInBand --watch --",
